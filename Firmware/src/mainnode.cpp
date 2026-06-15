@@ -13,12 +13,10 @@
 
 HX711 scale;
 CIIFilter filterStack;
-
 // State Tracking Parameters
 float prevP = 0.0, prevV = 0.0;
 unsigned long lastTickTime = 0;
 unsigned long simStartTime = 0;
-
 void writeI2C(uint8_t reg, uint8_t val) {
     Wire.beginTransmission(ADXL345_ADDR);
     Wire.write(reg);
@@ -74,12 +72,9 @@ void loop() {
     // Execute exactly once per second non-blockingly
     if (currentTick - lastTickTime >= 1000) {
         float dt = (currentTick - lastTickTime) / 1000.0;
-
         float vibrationLevel = 0.0;
         readAccelerometer(vibrationLevel);
-
         float noiseLevel = analogRead(MIC_PIN) / 4095.0;
-
         long rawWeight = scale.is_ready() ? scale.read() : 0;
         float weightLevel = abs(rawWeight) / 10000000.0;
         if (weightLevel > 1.0) weightLevel = 1.0;
