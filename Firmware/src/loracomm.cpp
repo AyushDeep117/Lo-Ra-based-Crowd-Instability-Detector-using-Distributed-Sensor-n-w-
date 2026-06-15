@@ -1,4 +1,4 @@
-#include "lora_comm.h"
+#include "loracomm.h"
 #include "config.h"
 #include <SPI.h>
 #include <LoRa.h>
