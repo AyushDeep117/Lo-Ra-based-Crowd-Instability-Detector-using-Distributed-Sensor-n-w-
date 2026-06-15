@@ -1,0 +1,15 @@
+# PlatformIO
+.pio/
+.vscode/
+
+# Compiled firmware binaries
+*.bin
+*.elf
+*.hex
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Private credentials (if you ever add WiFi/Database passwords later)
+secrets.h
