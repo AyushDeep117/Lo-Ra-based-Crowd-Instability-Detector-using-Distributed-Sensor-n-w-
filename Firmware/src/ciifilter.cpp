@@ -1,4 +1,4 @@
-#include "cii_filter.h"
+#include "ciifilter.h"
 #include "config.h"
 #include <math.h>
 

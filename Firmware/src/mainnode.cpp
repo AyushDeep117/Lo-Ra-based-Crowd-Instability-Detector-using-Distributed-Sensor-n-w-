@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include "HX711.h"
 #include "config.h"
-#include "cii_filter.h"
-#include "lora_comm.h"
+#include "ciifilter.h"
+#include "loracomm.h"
 
 // ADXL345 Registers via I2C Bus Configuration 
 #define ADXL345_ADDR          0x53
@@ -98,16 +98,13 @@ void loop() {
         Serial.println("\n=== REAL-TIME NODE METRICS ===");
         Serial.printf("P: %.2f | V: %.2f | S: %.2f | dP/dt: %.2f | dV/dt: %.2f\n", weightLevel, vibrationLevel, noiseLevel, deltaP, deltaV);
         Serial.printf("CII Value: %.4f | Dynamic Limit (µ+kσ): %.4f\n", currentCII, adaptiveThreshold);
-
         if (currentCII > adaptiveThreshold || currentCII > 0.70) { 
             alertCode = 1.0;
             Serial.println("[!!! RUNTIME THRESHOLD ALERT CRITICAL RISK !!!]");
         } else {
             Serial.println("System Security Frame State: SECURE / MINIMAL DISTURBANCE");
         }
-
         transmitTelemetry(currentCII, noiseLevel, weightLevel, vibrationLevel, alertCode);
-
         lastTickTime = currentTick;
     }
 }
